@@ -49,11 +49,13 @@ public static class Algorithms {
     /// done the count is returned.
     /// </summary>
     /// <param name="size">the amount of work to do</param>
-    private static int Algorithm2(int size) {
+
+    private static int Algorithm2(int size)
+    {
         var count = 0;
         for (var i = 0; i < size; ++i)
-        for (var j = 0; j < size; ++j)
-            count += 1;
+            for (var j = 0; j < size; ++j)
+                count += 1;
 
         return count;
     }
@@ -64,11 +66,14 @@ public static class Algorithms {
     /// done the count is returned.
     /// </summary>
     /// <param name="size">the amount of work to do</param>
-    private static int Algorithm3(int size) {
+
+    private static int Algorithm3(int size)
+    {
         var count = 0;
         var start = 0;
         var end = size - 1;
-        while (start <= end) {
+        while (start <= end)
+        {
             var middle = (end - start) / 2 + start;
             start = middle + 1;
             count += 1;
