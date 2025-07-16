@@ -9,9 +9,9 @@
 /// </summary>
 public class TakingTurnsQueue
 {
-    private readonly PersonQueue _people = new();
+    private readonly PersonQueue _people = new(); // Initialize new queue
 
-    public int Length => _people.Length;
+    public int Length => _people.Length; // Get the length of the queue
 
     /// <summary>
     /// Add new people to the queue with a name and number of turns
