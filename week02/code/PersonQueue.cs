@@ -11,12 +11,13 @@ public class PersonQueue
     /// Add a person to the queue
     /// </summary>
     /// <param name="person">The person to add</param>
-    public void Enqueue(Person person)
+
+    public void Enqueue(Person person) // add an item to the queue
     {
-        _queue.Insert(0, person);
+        _queue.Add(person);
     }
 
-    public Person Dequeue()
+    public Person Dequeue() // remove an item from the queue
     {
         var person = _queue[0];
         _queue.RemoveAt(0);
