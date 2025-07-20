@@ -1,3 +1,5 @@
+//Maze.cs
+
 /// <summary>
 /// Defines a maze using a dictionary. The dictionary is provided by the
 /// user when the Maze object is created. The dictionary will contain the
@@ -33,6 +35,11 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        var currCell = _mazeMap[(_currX, _currY)];
+        // currCell[0] is left
+        if (!currCell[0])
+            throw new InvalidOperationException("Can't go that way!");
+        _currX -= 1;
     }
 
     /// <summary>
@@ -42,6 +49,11 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+        var currCell = _mazeMap[(_currX, _currY)];
+        // currCell[1] is right
+        if (!currCell[1])
+            throw new InvalidOperationException("Can't go that way!");
+        _currX += 1;
     }
 
     /// <summary>
@@ -51,6 +63,11 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        var currCell = _mazeMap[(_currX, _currY)];
+        // currCell[2] is up
+        if (!currCell[2])
+            throw new InvalidOperationException("Can't go that way!");
+        _currY -= 1;
     }
 
     /// <summary>
@@ -60,6 +77,11 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+        var currCell = _mazeMap[(_currX, _currY)];
+        // currCell[3] is down
+        if (!currCell[3])
+            throw new InvalidOperationException("Can't go that way!");
+        _currY += 1;
     }
 
     public string GetStatus()

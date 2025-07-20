@@ -22,7 +22,27 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+
+        var wordSet = new HashSet<string>(words);
+        var pairs = new List<string>();
+
+        foreach (var word in words)
+        {
+            if (word[0] != word[1]) // skip words like "aa"
+            {
+                var reversed = new string( [word[1], word[0]] );
+                if (wordSet.Contains(reversed))
+                {
+                    if (string.Compare(word, reversed) < 0)
+                    {
+                        pairs.Add($"{word} & {reversed}"); // track seen pairs
+                    }
+                    
+                }
+            }
+        }
+
+        return pairs.ToArray();
     }
 
     /// <summary>
@@ -30,8 +50,8 @@ public static class SetsAndMaps
     /// earned by those contained in the file.  The summary
     /// should be stored in a dictionary where the key is the
     /// degree earned and the value is the number of people that 
-    /// have earned that degree.  The degree information is in
-    /// the 4th column of the file.  There is no header row in the
+    /// have earned that degree. The degree information is in
+    /// the 4th column of the file. There is no header row in the
     /// file.
     /// </summary>
     /// <param name="filename">The name of the file to read</param>
@@ -43,6 +63,13 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3];
+            if (!degrees.TryGetValue(degree, out int value))
+            {
+                value = 0;
+                degrees[degree] = value;
+            }
+            degrees[degree] = ++value;
         }
 
         return degrees;
@@ -67,7 +94,30 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        word1 = new string(word1.Where(char.IsLetter).ToArray()).ToLower();
+        word2 = new string(word2.Where(char.IsLetter).ToArray()).ToLower();
+
+        var charCount = new Dictionary<char, int>();
+
+        foreach (var c in word1)
+        {
+            if (!charCount.ContainsKey(c))
+                charCount[c] = 0;
+            charCount[c]++;
+        }
+
+        foreach (var c in word2)
+        {
+            if (!charCount.ContainsKey(c))
+                return false;
+            charCount[c]--;
+            if (charCount[c] < 0)
+                return false;
+        }
+
+        return charCount.Values.All(v => v == 0);
+
+
     }
 
     /// <summary>
@@ -101,6 +151,15 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+        var results = new List<string>();
+        foreach (var f in featureCollection.features)
+        {
+            var mag = f.properties.mag.HasValue ? f.properties.mag.Value.ToString("0.00") : "N/A";
+            var place = f.properties.place ?? "Unknown place";
+            results.Add($"{place} - Mag {mag}");
+        }
+
+        return results.ToArray();
     }
 }
